@@ -1,314 +1,188 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html><html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>屋台POS 完全版</title>
-
-<style>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>屋台POS 完全版</title><style>
 *{
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:sans-serif;
 }
 
 body{
-  margin:0;
-  padding:15px;
-  background:#f3f4f6;
-  font-family:'Segoe UI',sans-serif;
+background:#f3f4f6;
+padding:15px;
 }
 
 h1{
-  text-align:center;
-  background:#1f2937;
-  color:white;
-  padding:20px;
-  border-radius:16px;
-  
-  font-size:42px;
-  margin-bottom:20px;
+background:#1e293b;
+color:white;
+padding:20px;
+border-radius:20px;
+text-align:center;
+font-size:40px;
+margin-bottom:20px;
 }
 
-h2,h3{
-  text-align:center;
-}
-
-.background:white;
-  padding:20px;
-  border-radius:20px;
-  margin-bottom:20px;
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
+.card{
+background:white;
+padding:15px;
+border-radius:20px;
+margin-bottom:20px;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
 #cashier{
-  width:100%;
-  height:60px;
-  font-size:22px;
-  border:2px solid #ddd;
-  border-radius:12px;
-  padding:10px;
+width:100%;
+height:55px;
+font-size:22px;
+padding:10px;
+border-radius:12px;
+border:1px solid #ccc;
 }
 
 #items{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
-.item-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  background:white;
-  color:black;
-
-  padding:20px;
-  margin-bottom:15px;
-
-  border-radius:18px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-}
-  padding:15px;
-  border-radius:18px;
-  margin-bottom:15px;
-  color:white;
-}
-.item-row{
- background:white;
- color:black;
- box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
+.item{
+background:white;
+border-radius:20px;
+padding:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
-
-
-
+.item img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:15px;
+}
 
 .item-name{
-  font-size:28px;
-  font-weight:bold;
+font-size:20px;
+font-weight:bold;
+margin-top:10px;
 }
 
 .item-price{
-  font-size:18px;
+color:#666;
+margin-top:5px;
 }
 
-.ctrl button{
-  width:70px;
-  height:70px;
-
-  border:none;
-  border-radius:14px;
-
-  font-size:36px;
-  font-weight:bold;
-
-  background:#f3f4f6;
+.qty{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin-top:10px;
 }
 
- width:60px;
-  height:60px;
-  border:none;
-  border-radius:15px;
-  background:white;
-  font-size:30px;
-  font-weight:bold;
+.qty button{
+width:50px;
+height:50px;
+border:none;
+border-radius:12px;
+font-size:28px;
+font-weight:bold;
+background:#e5e7eb;
+}
+
+.qty span{
+font-size:28px;
+font-weight:bold;
 }
 
 .big-total{
-  text-align:center;
-   font-size:72px;
-  font-weight:900;
-  color:#111827;
-  margin:30px 0;
+font-size:60px;
+font-weight:bold;
+text-align:center;
+margin:20px 0;
 }
 
-.action{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
 }
 
-.action button{
-  height:80px;
-  border:none;
-  border-radius:16px;
-  font-size:26px;
-  font-weight:bold;
-  color:white;
-.action button:first-child{
-  background:#22c55e;
+.actions button{
+height:70px;
+border:none;
+border-radius:15px;
+font-size:24px;
+font-weight:bold;
+color:white;
 }
 
-.action button:last-child{
-  background:#ef4444;
+.checkout{
+background:#22c55e;
 }
 
-.latest-btn{
-  background:#f59e0b;
-  color:black;
-  border:none;
-  border-radius:16px;
+.reset{
+background:#ef4444;
 }
 
-.csv-btn{
-  background:#3b82f6;
-  color:white;
-  border:none;
-  border-radius:16px;
-}
-.action button:first-child{
-  background:#4CAF50;
-}
-
-.action button:last-child{
-  background:#F44336;
+.latest{
+width:100%;
+height:70px;
+margin-top:10px;
+background:#f59e0b;
+border:none;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
 }
 
-.latest-btn{
-  width:100%;
-  height:80px;
-  margin-top:10px;
-  border:none;
-  border-radius:15px;
-  background:#FFC107;
-  color:black;
-  font-size:24px;
-  font-weight:bold;
-}
-
-.csv-btn{
-  width:100%;
-  height:80px;
-  margin-top:10px;
-  border:none;
-  border-radius:15px;
-  background:#03A9F4;
-  color:white;
-  font-size:24px;
-  font-weight:bold;
-}
-
-.summary-box{
-  font-size:24px;
-  line-height:2;
+.csv{
+width:100%;
+height:70px;
+margin-top:10px;
+background:#3b82f6;
+color:white;
+border:none;
+border-radius:15px;
+font-size:22px;
+font-weight:bold;
 }
 
 .sale-card{
-  border-bottom:1px solid #ddd;
-  padding:15px 0;
-  font-size:20px;
+padding:12px;
+border-bottom:1px solid #ddd;
 }
 
 .cancelled{
-  color:red;
-  font-weight:bold;
+color:red;
+font-weight:bold;
 }
 
-#dailyTotal{
-  color:#F44336;
+.summary{
+font-size:22px;
+line-height:2;
 }
-#items{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
-}
-
-.item-row{
-  display:block;
-  min-height:140px;
-  padding:15px;
-  border-radius:18px;
-  margin-bottom:15px;
-  background:white;
-  color:black;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.item-name{
- font-size:22px;
- font-weight:bold;
-}
-
-.item-price{
- color:#666;
- margin-top:5px;
-}
-
-.qty-area{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-top:20px;
-}
-
-.qty-area button{
- width:45px;
- height:45px;
- border:none;
- border-radius:12px;
- font-size:24px;
-}
-
-.item-row img{
- width:100%;
- display:block;
- margin-bottom:10px;
- border-radius:12px;
-}
-</style>
-</style>
-
-</head>
-
-<body>
-
-<h1>屋台POS</h1>
-
-<div class="card">
-<h3>担当者名</h3>
+</style></head><body><h1>屋台POS</h1><div class="card">
+<h2>担当者名</h2>
 <input id="cashier" placeholder="会計ごとに入力">
-</div>
-
-<div class="card">
-<div id="items"></div>
-</div>
-
-<div class="big-total" id="cartTotal">
-0円
-</div>
-
-<div class="action">
-<button onclick="checkout()">会計</button>
-<button onclick="resetCart()">リセット</button>
-</div>
-
-<button class="latest-btn" onclick="cancelLatestSale()">
+</div><div id="items"></div><div id="cartTotal" class="big-total">0円</div><div class="actions">
+<button class="checkout" onclick="checkout()">会計</button>
+<button class="reset" onclick="resetCart()">リセット</button>
+</div><button class="latest" onclick="cancelLatestSale()">
 最新会計を取消
-</button>
-
-<button class="csv-btn" onclick="downloadCSV()">
+</button><button class="csv" onclick="downloadCSV()">
 CSVダウンロード
-</button>
-
-<div class="card">
+</button><div class="card">
 <h2>本日の売上合計</h2>
 <div id="dailyTotal" class="big-total">0円</div>
-</div>
-
-<div class="card">
+</div><div class="card">
 <h2>商品別集計</h2>
-<div id="productSummary" class="summary-box"></div>
-</div>
-
-<div class="card">
+<div id="productSummary" class="summary"></div>
+</div><div class="card">
 <h2>売上履歴</h2>
 <div id="history"></div>
-</div>
-
-<script type="module">
+</div><script type="module">
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -326,128 +200,92 @@ updateDoc
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCWoAJihRNiylAvE7IQMY4LsIwDF3duBTA",
-authDomain: "ringo-44a8c.firebaseapp.com",
-projectId: "ringo-44a8c",
-storageBucket: "ringo-44a8c.firebasestorage.app",
-messagingSenderId: "588192537966",
-appId: "1:588192537966:web:b6fcc4da16431c62d0757f",
-measurementId: "G-H5CXWLK6NF"
+apiKey:"AIzaSyCWoAJihRNiylAvE7IQMY4LsIwDF3duBTA",
+authDomain:"ringo-44a8c.firebaseapp.com",
+projectId:"ringo-44a8c",
+storageBucket:"ringo-44a8c.firebasestorage.app",
+messagingSenderId:"588192537966",
+appId:"1:588192537966:web:b6fcc4da16431c62d0757f"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const products = {
-  "冷やしきゅうり":{
-    price:200,
-    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
-  },
-
-  "ヨーヨー釣り":{
-    price:100,
-    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-03-52-21-386_com.android.chrome~2.jpg"
-  },
-
-  "フルーツミックス":{
-    price:200,
-    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
-  },
-
-  "ポッキンアイス":{
-    price:100,
-    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-04-23-40-855_com.android.chrome~2.jpg"
-  }
+"冷やしきゅうり":{
+price:200,
+img:"CUCUMBER_IMAGE_URL"
+},
+"ヨーヨー釣り":{
+price:100,
+img:"YOYO_IMAGE_URL"
+},
+"フルーツミックス":{
+price:200,
+img:"FRUIT_IMAGE_URL"
+},
+"ポッキンアイス":{
+price:100,
+img:"ICE_IMAGE_URL"
+}
 };
-function renderItems(){
-function renderItems(){
 
- let html="";
- let total=0;
+let cart={};
+let sales=[];
 
- for(let name in products){
-
-   const price=products[name].price;
-   const image=products[name].image;
-   const qty=cart[name];
-
-   total+=price*qty;
-
-   html+=`
-   <div class="item-row">
-
-      <img
-        src="${image}"
-        style="
-        width:100%;
-        height:140px;
-        object-fit:cover;
-        border-radius:12px;
-        "
-      >
-
-      <div class="item-name">
-        ${name}
-      </div>
-
-      <div class="item-price">
-        ${price}円
-      </div>
-
-      <div class="qty-area">
-
-         <button onclick="removeItem('${name}')">
-           −
-         </button>
-
-         <span style="font-size:28px;font-weight:bold">
-           ${qty}
-         </span>
-
-         <button onclick="addItem('${name}')">
-           ＋
-         </button>
-
-      </div>
-
-   </div>
-   `;
- }
-
- document.getElementById("items").innerHTML=html;
- document.getElementById("cartTotal").innerText=
- total+"円";
+for(let p in products){
+cart[p]=0;
 }
 
-document.getElementById("items").innerHTML = html;
-document.getElementById("cartTotal").innerText =
-total + "円";
+function renderItems(){
+
+let html="";
+let total=0;
+
+for(let name in products){
+
+const item=products[name];
+const qty=cart[name];
+
+total+=item.price*qty;
+
+html+=`
+<div class="item">
+<img src="${item.img}">
+<div class="item-name">${name}</div>
+<div class="item-price">${item.price}円</div>
+
+<div class="qty">
+<button onclick="removeItem('${name}')">−</button>
+<span>${qty}</span>
+<button onclick="addItem('${name}')">＋</button>
+</div>
+</div>
+`;
 }
 
-window.addItem = function(name){
+document.getElementById("items").innerHTML=html;
+document.getElementById("cartTotal").innerText=total+"円";
+}
+
+window.addItem=(name)=>{
 cart[name]++;
 renderItems();
-}
+};
 
-window.removeItem = function(name){
-if(cart[name] > 0){
-cart[name]--;
-}
+window.removeItem=(name)=>{
+if(cart[name]>0) cart[name]--;
 renderItems();
-}
+};
 
-window.resetCart = function(){
-
-for(let p in cart){
-cart[p] = 0;
-}
-
+window.resetCart=()=>{
+for(let p in cart) cart[p]=0;
 renderItems();
-}
+};
 
-window.checkout = async function(){
+window.checkout=async()=>{
 
-const cashier =
+const cashier=
 document.getElementById("cashier").value.trim();
 
 if(!cashier){
@@ -455,263 +293,157 @@ alert("担当者名を入力してください");
 return;
 }
 
-let total = 0;
-let items = [];
+let items=[];
+let total=0;
 
-for(let name in cart){
+for(let p in cart){
 
-if(cart[name] > 0){
+if(cart[p]>0){
 
 items.push({
-name:name,
-qty:cart[name],
-products[name].price
+name:p,
+qty:cart[p],
+price:products[p].price
 });
 
-total += cart[name] * products[name].price
+total+=cart[p]*products[p].price;
 }
 }
 
-if(total === 0){
+if(total===0){
 alert("商品を選択してください");
 return;
 }
 
-await addDoc(
-collection(db,"sales"),
-{
+await addDoc(collection(db,"sales"),{
 cashier,
 items,
 total,
 cancelled:false,
 createdAt:Date.now()
-}
-);
+});
 
-document.getElementById("cashier").value = "";
+document.getElementById("cashier").value="";
+resetCart();
 
-for(let p in cart){
-cart[p] = 0;
-}
+alert("会計完了");
+};
 
-alert("会計完了：" + total + "円");
-}
-
-
-
-let cart = {};
-let sales = [];
-
-for(let p in products){
-cart[p]=0;
-}
-
-  renderItems();
-  
-  const salesQuery = query(
+const q=query(
 collection(db,"sales"),
 orderBy("createdAt","desc")
 );
 
-onSnapshot(salesQuery,(snapshot)=>{
+onSnapshot(q,(snap)=>{
 
-sales = [];
+sales=[];
 
-snapshot.forEach((docSnap)=>{
-
+snap.forEach(docSnap=>{
 sales.push({
 id:docSnap.id,
 ...docSnap.data()
 });
-
 });
 
 renderHistory();
 renderSummary();
-
 });
 
 function renderHistory(){
 
-let html = "";
+let html="";
 
-if(sales.length === 0){
+sales.forEach(s=>{
 
-html = "<p>まだ売上がありません</p>";
-
-}else{
-
-sales.forEach((sale)=>{
-
-let itemText = sale.items
-.map(i=>`${i.name}×${i.qty}`)
-.join("、");
-
-html += `
+html+=`
 <div class="sale-card">
-
-<div>
-${new Date(sale.createdAt)
-.toLocaleString()}
-</div>
-
-<div>
-担当：${sale.cashier}
-</div>
-
-<div>
-${itemText}
-</div>
-
-<div>
-<strong>${sale.total}円</strong>
-</div>
-
-${sale.cancelled
-? '<div class="cancelled">取消済み</div>'
-: ''
-}
-
+<div>${new Date(s.createdAt).toLocaleString()}</div>
+<div>担当:${s.cashier}</div>
+<div>${s.total}円</div>
+${s.cancelled ? '<div class="cancelled">取消済み</div>' : ''}
 </div>
 `;
 });
-}
 
-document.getElementById("history").innerHTML = html;
+document.getElementById("history").innerHTML=html;
 }
 
 function renderSummary(){
 
-let totalSales = 0;
+let total=0;
 
-let counts = {
-"冷やしきゅうり":0,
-"ヨーヨー釣り":0,
-"フルーツミックス":0,
-"ポッキンアイス":0
-};
+let counts={};
 
-sales.forEach((sale)=>{
+for(let p in products){
+counts[p]=0;
+}
 
-if(sale.cancelled) return;
+sales.forEach(s=>{
 
-totalSales += sale.total;
+if(s.cancelled) return;
 
-sale.items.forEach((item)=>{
+total+=s.total;
 
-counts[item.name] += item.qty;
-
+s.items.forEach(i=>{
+counts[i.name]+=i.qty;
+});
 });
 
-});
+document.getElementById("dailyTotal").innerText=
+total+"円";
 
-document.getElementById(
-"dailyTotal"
-).innerText = totalSales + "円";
+let html="";
 
-let html = "";
-
-for(let name in counts){
-
-html += `
-<div>
-${name}
-：
-${counts[name]}個
-</div>
-`;
-
+for(let p in counts){
+html+=`<div>${p} : ${counts[p]}個</div>`;
 }
 
-document.getElementById(
-"productSummary"
-).innerHTML = html;
-
-}
-window.cancelLatestSale = async function(){
-
-const activeSales =
-sales.filter(s => !s.cancelled);
-
-if(activeSales.length === 0){
-alert("取消できる会計がありません");
-return;
+document.getElementById("productSummary").innerHTML=
+html;
 }
 
-const latest = activeSales[0];
+window.cancelLatestSale=async()=>{
 
-const ok = confirm(
-"最新会計を取消しますか？"
-);
+const active=
+sales.filter(s=>!s.cancelled);
 
-if(!ok) return;
+if(active.length===0) return;
 
 await updateDoc(
-doc(db,"sales",latest.id),
+doc(db,"sales",active[0].id),
 {
-cancelled:true,
-cancelledAt:Date.now()
+cancelled:true
 }
 );
 
 alert("取消しました");
-
 };
 
-window.downloadCSV = function(){
+window.downloadCSV=()=>{
 
-let csv =
-"日時,担当者,商品,合計,状態\n";
+let csv="日時,担当者,合計,状態\n";
 
-sales.forEach((sale)=>{
+sales.forEach(s=>{
 
-const items =
-sale.items
-.map(i=>`${i.name}×${i.qty}`)
-.join(" ");
-
-const status =
-sale.cancelled
-? "取消済み"
-: "正常";
-
-const row = [
-new Date(sale.createdAt)
-.toLocaleString(),
-sale.cashier,
-items,
-sale.total,
-status
-];
-
-csv += row.join(",") + "\n";
+csv+=`${new Date(s.createdAt).toLocaleString()},${s.cashier},${s.total},${s.cancelled?"取消":"正常"}\n`;
 
 });
 
-const blob =
-new Blob(
-[csv],
-{type:"text/csv;charset=utf-8;"}
-);
+const blob=
+new Blob([csv],{type:"text/csv"});
 
-const link =
+const a=
 document.createElement("a");
 
-link.href =
+a.href=
 URL.createObjectURL(blob);
 
-link.download =
-"sales.csv";
+a.download="sales.csv";
 
-document.body.appendChild(link);
-
-link.click();
-
-document.body.removeChild(link);
-
+a.click();
 };
 
-</script>
+renderItems();
 
-</body>
+</script></body>
 </html>
