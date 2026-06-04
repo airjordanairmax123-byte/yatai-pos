@@ -251,6 +251,14 @@ h2,h3{
  border-radius:12px;
  font-size:24px;
 }
+
+.item-row img{
+ width:100%;
+ display:block;
+ margin-bottom:10px;
+ border-radius:12px;
+}
+</style>
 </style>
 
 </head>
@@ -331,49 +339,84 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const products = {
-"冷やしきゅうり":200,
-"ヨーヨー釣り":100,
-"フルーツミックス":200,
-"ポッキンアイス":100
+  "冷やしきゅうり":{
+    price:200,
+    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
+  },
+
+  "ヨーヨー釣り":{
+    price:100,
+    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-03-52-21-386_com.android.chrome~2.jpg"
+  },
+
+  "フルーツミックス":{
+    price:200,
+    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
+  },
+
+  "ポッキンアイス":{
+    price:100,
+    image:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/Screenshot_2026-06-05-04-23-40-855_com.android.chrome~2.jpg"
+  }
 };
 function renderItems(){
+function renderItems(){
 
-let html = "";
-let total = 0;
+ let html="";
+ let total=0;
 
-for(let name in products){
+ for(let name in products){
 
-let price = products[name];
-let qty = cart[name];
+   const price=products[name].price;
+   const image=products[name].image;
+   const qty=cart[name];
 
-total += price * qty;
+   total+=price*qty;
 
-html += `
-<div class="item-row">
- <div class="item-name">冷やしきゅうり</div>
-  <div class="item-price">200円</div>
+   html+=`
+   <div class="item-row">
 
-  <div class="qty-area">
-     <button>−</button>
-     <span>0</span>
-     <button>＋</button>
-  </div>
-</div>
+      <img
+        src="${image}"
+        style="
+        width:100%;
+        height:140px;
+        object-fit:cover;
+        border-radius:12px;
+        "
+      >
 
-<div>
-<div class="item-name">${name}</div>
-<div class="item-price">
-${price}円 × ${qty}
-</div>
-</div>
+      <div class="item-name">
+        ${name}
+      </div>
 
-<div class="ctrl">
-<button onclick="addItem('${name}')">＋</button>
-<button onclick="removeItem('${name}')">－</button>
-</div>
+      <div class="item-price">
+        ${price}円
+      </div>
 
-</div>
-`;
+      <div class="qty-area">
+
+         <button onclick="removeItem('${name}')">
+           −
+         </button>
+
+         <span style="font-size:28px;font-weight:bold">
+           ${qty}
+         </span>
+
+         <button onclick="addItem('${name}')">
+           ＋
+         </button>
+
+      </div>
+
+   </div>
+   `;
+ }
+
+ document.getElementById("items").innerHTML=html;
+ document.getElementById("cartTotal").innerText=
+ total+"円";
 }
 
 document.getElementById("items").innerHTML = html;
@@ -422,10 +465,10 @@ if(cart[name] > 0){
 items.push({
 name:name,
 qty:cart[name],
-price:products[name]
+products[name].price
 });
 
-total += cart[name] * products[name];
+total += cart[name] * products[name].price
 }
 }
 
