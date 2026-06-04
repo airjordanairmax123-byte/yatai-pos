@@ -14,32 +14,29 @@
 body{
   margin:0;
   padding:15px;
-  background:#f4437a;
-  font-family:sans-serif;
+  background:#f3f4f6;
+  font-family:'Segoe UI',sans-serif;
 }
 
 h1{
   text-align:center;
+  background:#1f2937;
   color:white;
-  font-size:48px;
-  margin:20px 0;
-}
-
-h2{
-  text-align:center;
+  padding:20px;
+  border-radius:16px;
+  font-size:42px;
   margin-bottom:20px;
 }
 
-h3{
+h2,h3{
   text-align:center;
 }
 
-.card{
-  background:white;
+.background:white;
+  padding:20px;
   border-radius:20px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.15);
+  margin-bottom:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 #cashier{
@@ -53,14 +50,27 @@ h3{
 
 .item-row{
   display:flex;
-  justify-content:space-between;
-  align-items:center;
   padding:15px;
-  border-radius:16px;
-  margin-bottom:12px;
+  border-radius:18px;
+  margin-bottom:15px;
   color:white;
 }
+.item-row:nth-child(1){
+ background:#22c55e;
+}
 
+.item-row:nth-child(2){
+ background:#ef4444;
+}
+
+.item-row:nth-child(3){
+ background:#f59e0b;
+ color:black;
+}
+
+.item-row:nth-child(4){
+ background:#3b82f6;
+}
 .item-row:nth-child(1){
   background:#4CAF50;
 }
@@ -92,22 +102,21 @@ h3{
   gap:8px;
 }
 
-.ctrl button{
-  width:65px;
-  height:65px;
+ width:60px;
+  height:60px;
   border:none;
-  border-radius:12px;
-  font-size:32px;
-  font-weight:bold;
+  border-radius:15px;
   background:white;
+  font-size:30px;
+  font-weight:bold;
 }
 
 .big-total{
   text-align:center;
-  font-size:72px;
-  font-weight:bold;
-  color:white;
-  margin:25px 0;
+   font-size:72px;
+  font-weight:900;
+  color:#111827;
+  margin:30px 0;
 }
 
 .action{
@@ -119,12 +128,31 @@ h3{
 .action button{
   height:80px;
   border:none;
-  border-radius:15px;
-  color:white;
-  font-size:24px;
+  border-radius:16px;
+  font-size:26px;
   font-weight:bold;
+  color:white;
+.action button:first-child{
+  background:#22c55e;
 }
 
+.action button:last-child{
+  background:#ef4444;
+}
+
+.latest-btn{
+  background:#f59e0b;
+  color:black;
+  border:none;
+  border-radius:16px;
+}
+
+.csv-btn{
+  background:#3b82f6;
+  color:white;
+  border:none;
+  border-radius:16px;
+}
 .action button:first-child{
   background:#4CAF50;
 }
