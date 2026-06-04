@@ -56,8 +56,19 @@ h2,h3{
 }
 
 .item-row{
-  display:block;
-  min-height:140px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:white;
+  color:black;
+
+  padding:20px;
+  margin-bottom:15px;
+
+  border-radius:18px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
 }
   padding:15px;
   border-radius:18px;
@@ -76,7 +87,7 @@ h2,h3{
 
 
 .item-name{
-  font-size:24px;
+  font-size:28px;
   font-weight:bold;
 }
 
@@ -84,9 +95,17 @@ h2,h3{
   font-size:18px;
 }
 
-.ctrl{
-  display:flex;
-  gap:8px;
+.ctrl button{
+  width:70px;
+  height:70px;
+
+  border:none;
+  border-radius:14px;
+
+  font-size:36px;
+  font-weight:bold;
+
+  background:#f3f4f6;
 }
 
  width:60px;
