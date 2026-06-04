@@ -300,8 +300,6 @@ for(let p in cart){
 cart[p] = 0;
 }
 
-renderItems();
-
 alert("会計完了：" + total + "円");
 }
 
@@ -314,6 +312,9 @@ let sales = [];
 for(let p in products){
 cart[p]=0;
 }
+
+  renderItems();
+  
   const salesQuery = query(
 collection(db,"sales"),
 orderBy("createdAt","desc")
