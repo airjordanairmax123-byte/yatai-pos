@@ -1,8 +1,13 @@
-<!DOCTYPE html><html lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>屋台POS 完全版</title><style>
+
+<title>屋台POS 完全版</title>
+
+<style>
+
 *{
 margin:0;
 padding:0;
@@ -12,34 +17,34 @@ font-family:sans-serif;
 
 body{
 background:#f3f4f6;
-padding:15px;
+padding:12px;
 }
 
 h1{
+text-align:center;
 background:#1e293b;
 color:white;
-padding:20px;
-border-radius:20px;
-text-align:center;
-font-size:40px;
-margin-bottom:20px;
+padding:18px;
+border-radius:18px;
+margin-bottom:15px;
+font-size:34px;
 }
 
 .card{
 background:white;
 padding:15px;
-border-radius:20px;
-margin-bottom:20px;
-box-shadow:0 3px 10px rgba(0,0,0,.1);
+border-radius:18px;
+margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
 }
 
 #cashier{
 width:100%;
 height:55px;
-font-size:22px;
+font-size:20px;
 padding:10px;
-border-radius:12px;
 border:1px solid #ccc;
+border-radius:12px;
 }
 
 #items{
@@ -50,22 +55,25 @@ gap:12px;
 
 .item{
 background:white;
-border-radius:20px;
-padding:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 2px 8px rgba(0,0,0,.12);
 }
 
 .item img{
 width:100%;
-height:140px;
+height:130px;
 object-fit:cover;
-border-radius:15px;
+display:block;
+}
+
+.item-body{
+padding:10px;
 }
 
 .item-name{
-font-size:20px;
+font-size:18px;
 font-weight:bold;
-margin-top:10px;
 }
 
 .item-price{
@@ -82,25 +90,36 @@ margin-top:10px;
 }
 
 .qty button{
-width:50px;
-height:50px;
+width:48px;
+height:48px;
 border:none;
 border-radius:12px;
 font-size:28px;
 font-weight:bold;
-background:#e5e7eb;
+}
+
+.minus{
+background:#ef4444;
+color:white;
+}
+
+.plus{
+background:#22c55e;
+color:white;
 }
 
 .qty span{
-font-size:28px;
+font-size:24px;
 font-weight:bold;
+min-width:30px;
+text-align:center;
 }
 
 .big-total{
-font-size:60px;
+font-size:56px;
 font-weight:bold;
 text-align:center;
-margin:20px 0;
+margin:15px 0;
 }
 
 .actions{
@@ -130,9 +149,9 @@ background:#ef4444;
 width:100%;
 height:70px;
 margin-top:10px;
-background:#f59e0b;
 border:none;
 border-radius:15px;
+background:#f59e0b;
 font-size:22px;
 font-weight:bold;
 }
@@ -141,12 +160,17 @@ font-weight:bold;
 width:100%;
 height:70px;
 margin-top:10px;
-background:#3b82f6;
-color:white;
 border:none;
 border-radius:15px;
+background:#3b82f6;
+color:white;
 font-size:22px;
 font-weight:bold;
+}
+
+.summary{
+font-size:22px;
+line-height:2;
 }
 
 .sale-card{
@@ -159,32 +183,89 @@ color:red;
 font-weight:bold;
 }
 
-.summary{
-font-size:22px;
-line-height:2;
-}
-</style></head><body><h1>屋台POS</h1><div class="card">
-<h2>担当者名</h2>
-<input id="cashier" placeholder="会計ごとに入力">
-</div><div id="items"></div><div id="cartTotal" class="big-total">0円</div><div class="actions">
-<button class="checkout" onclick="checkout()">会計</button>
-<button class="reset" onclick="resetCart()">リセット</button>
-</div><button class="latest" onclick="cancelLatestSale()">
-最新会計を取消
-</button><button class="csv" onclick="downloadCSV()">
-CSVダウンロード
-</button><div class="card">
-<h2>本日の売上合計</h2>
-<div id="dailyTotal" class="big-total">0円</div>
-</div><div class="card">
-<h2>商品別集計</h2>
-<div id="productSummary" class="summary"></div>
-</div><div class="card">
-<h2>売上履歴</h2>
-<div id="history"></div>
-</div><script type="module">
+</style>
+</head>
 
-import { initializeApp }
+<body>
+
+<h1>🏮 屋台POS</h1>
+
+<div class="card">
+<h2>担当者名</h2>
+<input
+id="cashier"
+placeholder="会計ごとに入力">
+</div>
+
+<div id="items"></div>
+
+<div
+id="cartTotal"
+class="big-total">
+0円
+</div>
+
+<div class="actions">
+
+<button
+class="checkout"
+onclick="checkout()">
+会計
+</button>
+
+<button
+class="reset"
+onclick="resetCart()">
+リセット
+</button>
+
+</div>
+
+<button
+class="latest"
+onclick="cancelLatestSale()">
+最新会計を取消
+</button>
+
+<button
+class="csv"
+onclick="downloadCSV()">
+CSVダウンロード
+</button>
+
+<div class="card">
+
+<h2>本日の売上合計</h2>
+
+<div
+id="dailyTotal"
+class="big-total">
+0円
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>商品別集計</h2>
+
+<div
+id="productSummary"
+class="summary">
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>売上履歴</h2>
+
+<div id="history"></div>
+
+</div>
+
+<script type="module">
+  import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -205,87 +286,124 @@ authDomain:"ringo-44a8c.firebaseapp.com",
 projectId:"ringo-44a8c",
 storageBucket:"ringo-44a8c.firebasestorage.app",
 messagingSenderId:"588192537966",
-appId:"1:588192537966:web:b6fcc4da16431c62d0757f"
+appId:"1:588192537966:web:b6fcc4da16431c62d0757f",
+measurementId:"G-H5CXWLK6NF"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const products = {
+
 "冷やしきゅうり":{
 price:200,
-img:"CUCUMBER_IMAGE_URL"
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
 },
+
 "ヨーヨー釣り":{
 price:100,
-img:"YOYO_IMAGE_URL"
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-52-21-386_com.android.chrome~2.jpg"
 },
+
 "フルーツミックス":{
 price:200,
-img:"FRUIT_IMAGE_URL"
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
 },
+
 "ポッキンアイス":{
 price:100,
-img:"ICE_IMAGE_URL"
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-23-40-855_com.android.chrome~2.jpg"
 }
+
 };
 
-let cart={};
-let sales=[];
+let cart = {};
+let sales = [];
 
 for(let p in products){
-cart[p]=0;
+cart[p] = 0;
 }
 
 function renderItems(){
 
-let html="";
-let total=0;
+let html = "";
+let total = 0;
 
 for(let name in products){
 
-const item=products[name];
-const qty=cart[name];
+const item = products[name];
+const qty = cart[name];
 
-total+=item.price*qty;
+total += item.price * qty;
 
-html+=`
+html += `
 <div class="item">
+
 <img src="${item.img}">
-<div class="item-name">${name}</div>
-<div class="item-price">${item.price}円</div>
+
+<div class="item-body">
+
+<div class="item-name">
+${name}
+</div>
+
+<div class="item-price">
+${item.price}円
+</div>
 
 <div class="qty">
-<button onclick="removeItem('${name}')">−</button>
+
+<button
+class="minus"
+onclick="removeItem('${name}')">
+−
+</button>
+
 <span>${qty}</span>
-<button onclick="addItem('${name}')">＋</button>
+
+<button
+class="plus"
+onclick="addItem('${name}')">
+＋
+</button>
+
 </div>
+
+</div>
+
 </div>
 `;
 }
 
-document.getElementById("items").innerHTML=html;
-document.getElementById("cartTotal").innerText=total+"円";
+document.getElementById("items").innerHTML = html;
+document.getElementById("cartTotal").innerText =
+total + "円";
 }
 
-window.addItem=(name)=>{
+window.addItem = function(name){
 cart[name]++;
 renderItems();
-};
+}
 
-window.removeItem=(name)=>{
-if(cart[name]>0) cart[name]--;
+window.removeItem = function(name){
+if(cart[name] > 0){
+cart[name]--;
+}
 renderItems();
-};
+}
 
-window.resetCart=()=>{
-for(let p in cart) cart[p]=0;
+window.resetCart = function(){
+
+for(let p in cart){
+cart[p] = 0;
+}
+
 renderItems();
-};
 
-window.checkout=async()=>{
+}
+  window.checkout = async function(){
 
-const cashier=
+const cashier =
 document.getElementById("cashier").value.trim();
 
 if(!cashier){
@@ -293,157 +411,248 @@ alert("担当者名を入力してください");
 return;
 }
 
-let items=[];
-let total=0;
+let items = [];
+let total = 0;
 
-for(let p in cart){
+for(let name in cart){
 
-if(cart[p]>0){
+if(cart[name] > 0){
 
 items.push({
-name:p,
-qty:cart[p],
-price:products[p].price
+name:name,
+qty:cart[name],
+price:products[name].price
 });
 
-total+=cart[p]*products[p].price;
+total += cart[name] * products[name].price;
 }
 }
 
-if(total===0){
+if(total === 0){
 alert("商品を選択してください");
 return;
 }
 
-await addDoc(collection(db,"sales"),{
+await addDoc(
+collection(db,"sales"),
+{
 cashier,
 items,
 total,
 cancelled:false,
 createdAt:Date.now()
-});
+}
+);
 
-document.getElementById("cashier").value="";
-resetCart();
+document.getElementById("cashier").value = "";
 
-alert("会計完了");
+for(let p in cart){
+cart[p] = 0;
+}
+
+renderItems();
+
+alert("会計完了：" + total + "円");
+
 };
 
-const q=query(
+const salesQuery = query(
 collection(db,"sales"),
 orderBy("createdAt","desc")
 );
 
-onSnapshot(q,(snap)=>{
+onSnapshot(salesQuery,(snapshot)=>{
 
-sales=[];
+sales = [];
 
-snap.forEach(docSnap=>{
+snapshot.forEach((docSnap)=>{
+
 sales.push({
 id:docSnap.id,
 ...docSnap.data()
 });
+
 });
 
 renderHistory();
 renderSummary();
+
 });
 
 function renderHistory(){
 
-let html="";
+let html = "";
 
-sales.forEach(s=>{
+if(sales.length === 0){
 
-html+=`
+html = "<p>まだ売上がありません</p>";
+
+}else{
+
+sales.forEach((sale)=>{
+
+let itemText = sale.items
+.map(i => `${i.name}×${i.qty}`)
+.join("、");
+
+html += `
 <div class="sale-card">
-<div>${new Date(s.createdAt).toLocaleString()}</div>
-<div>担当:${s.cashier}</div>
-<div>${s.total}円</div>
-${s.cancelled ? '<div class="cancelled">取消済み</div>' : ''}
+
+<div>
+${new Date(sale.createdAt).toLocaleString()}
+</div>
+
+<div>
+担当：${sale.cashier}
+</div>
+
+<div>
+${itemText}
+</div>
+
+<div>
+<strong>${sale.total}円</strong>
+</div>
+
+${sale.cancelled
+? '<div class="cancelled">取消済み</div>'
+: ''
+}
+
 </div>
 `;
 });
+}
 
-document.getElementById("history").innerHTML=html;
+document.getElementById("history").innerHTML =
+html;
 }
 
 function renderSummary(){
 
-let total=0;
+let totalSales = 0;
 
-let counts={};
+let counts = {};
 
 for(let p in products){
-counts[p]=0;
+counts[p] = 0;
 }
 
-sales.forEach(s=>{
+sales.forEach((sale)=>{
 
-if(s.cancelled) return;
+if(sale.cancelled) return;
 
-total+=s.total;
+totalSales += sale.total;
 
-s.items.forEach(i=>{
-counts[i.name]+=i.qty;
+sale.items.forEach((item)=>{
+
+counts[item.name] += item.qty;
+
 });
+
 });
 
-document.getElementById("dailyTotal").innerText=
-total+"円";
+document.getElementById("dailyTotal").innerText =
+totalSales + "円";
 
-let html="";
+let html = "";
 
-for(let p in counts){
-html+=`<div>${p} : ${counts[p]}個</div>`;
+for(let name in counts){
+
+html += `
+<div>
+${name} ： ${counts[name]}個
+</div>
+`;
 }
 
-document.getElementById("productSummary").innerHTML=
+document.getElementById("productSummary").innerHTML =
 html;
 }
 
-window.cancelLatestSale=async()=>{
+window.cancelLatestSale = async function(){
 
-const active=
-sales.filter(s=>!s.cancelled);
+const activeSales =
+sales.filter(s => !s.cancelled);
 
-if(active.length===0) return;
+if(activeSales.length === 0){
+alert("取消できる会計がありません");
+return;
+}
+
+const latest = activeSales[0];
+
+const ok = confirm(
+"最新会計を取消しますか？"
+);
+
+if(!ok) return;
 
 await updateDoc(
-doc(db,"sales",active[0].id),
+doc(db,"sales",latest.id),
 {
-cancelled:true
+cancelled:true,
+cancelledAt:Date.now()
 }
 );
 
 alert("取消しました");
+
 };
 
-window.downloadCSV=()=>{
+window.downloadCSV = function(){
 
-let csv="日時,担当者,合計,状態\n";
+let csv =
+"日時,担当者,商品,合計,状態\n";
 
-sales.forEach(s=>{
+sales.forEach((sale)=>{
 
-csv+=`${new Date(s.createdAt).toLocaleString()},${s.cashier},${s.total},${s.cancelled?"取消":"正常"}\n`;
+const items =
+sale.items
+.map(i => `${i.name}×${i.qty}`)
+.join(" ");
+
+const status =
+sale.cancelled
+? "取消済み"
+: "正常";
+
+csv += [
+new Date(sale.createdAt).toLocaleString(),
+sale.cashier,
+items,
+sale.total,
+status
+].join(",") + "\n";
 
 });
 
-const blob=
-new Blob([csv],{type:"text/csv"});
+const blob =
+new Blob(
+[csv],
+{type:"text/csv;charset=utf-8;"}
+);
 
-const a=
+const link =
 document.createElement("a");
 
-a.href=
+link.href =
 URL.createObjectURL(blob);
 
-a.download="sales.csv";
+link.download =
+"sales.csv";
 
-a.click();
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
 };
 
 renderItems();
 
-</script></body>
+</script>
+
+</body>
 </html>
