@@ -297,27 +297,25 @@ const products = {
 
 "冷やしきゅうり":{
 price:200,
-img:"CUCUMBER_IMAGE_URL"
 img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
 },
 
 "ヨーヨー釣り":{
 price:100,
-img:"YOYO_IMAGE_URL"
 img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-52-21-386_com.android.chrome~2.jpg"
 },
 
 "フルーツミックス":{
 price:200,
-img:"FRUIT_IMAGE_URL"
 img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
 },
 
 "ポッキンアイス":{
 price:100,
-img:"ICE_IMAGE_URL"
 img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-23-40-855_com.android.chrome~2.jpg"
 }
+
+};
 
 let cart = {};
 let sales = [];
@@ -401,7 +399,6 @@ cart[p] = 0;
 }
 
 renderItems();
-
 }
   window.checkout = async function(){
 
