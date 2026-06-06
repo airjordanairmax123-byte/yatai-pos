@@ -2,11 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>屋台POS 完全版</title>
 
@@ -301,9 +297,10 @@ const products = {
 
 "冷やしきゅうり":{
 price:200,
-img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
-},
-  
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
+},  
+
+
 "ヨーヨー釣り":{
 price:100,
 img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-52-21-386_com.android.chrome~2.jpg"
@@ -311,9 +308,8 @@ img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f
 
 "フルーツミックス":{
 price:200,
-img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-03-54-25-081_com.android.chrome~2.jpg"
-},  
-
+img:"https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/5f82c0f8ad53de2db392756b7de73dc6e771567c/Screenshot_2026-06-05-04-19-14-789_com.android.chrome~2.jpg"
+},
   
 "ポッキンアイス":{
 price:100,
@@ -405,11 +401,6 @@ cart[p] = 0;
 renderItems();
 }
   window.checkout = async function(){
-
-  alert("checkout start");
-
-  const cashier =
-  document.getElementById("cashier").value.trim();
 
 const cashier =
 document.getElementById("cashier").value.trim();
