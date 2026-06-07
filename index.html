@@ -480,12 +480,18 @@ onSnapshot(salesQuery,(snapshot)=>{
 
   snapshot.forEach((docSnap)=>{
 
+    const data = docSnap.data();
+
+    console.log(data);
+
     sales.push({
       id:docSnap.id,
-      ...docSnap.data()
+      ...data
     });
 
   });
+
+  alert("sales件数：" + sales.length);
 
   renderHistory();
   renderSummary();
@@ -494,6 +500,10 @@ onSnapshot(salesQuery,(snapshot)=>{
 
 function renderHistory(){
 
+  alert("renderHistory開始");
+
+  let html = "";
+  let html = "";
 let html = "";
 
 if(sales.length === 0){
