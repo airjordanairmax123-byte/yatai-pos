@@ -468,25 +468,27 @@ alert(err.message);
 }; //
 
 const salesQuery = query(
-collection(db,"sales"),
-orderBy("createdAt","desc")
+  collection(db,"sales"),
+  orderBy("createdAt","desc")
 );
 
 onSnapshot(salesQuery,(snapshot)=>{
 
-sales = [];
+  alert("取得件数：" + snapshot.size);
 
-snapshot.forEach((docSnap)=>{
+  sales = [];
 
-sales.push({
-id:docSnap.id,
-...docSnap.data()
-});
+  snapshot.forEach((docSnap)=>{
 
-});
+    sales.push({
+      id:docSnap.id,
+      ...docSnap.data()
+    });
 
-renderHistory();
-renderSummary();
+  });
+
+  renderHistory();
+  renderSummary();
 
 });
 
