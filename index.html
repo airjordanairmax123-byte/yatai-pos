@@ -432,7 +432,7 @@ alert("商品を選択してください");
 return;
 }
 try {
-
+alert("保存開始");
   await addDoc(
     collection(db,"sales"),
     {
@@ -443,7 +443,7 @@ try {
       createdAt:Date.now()
     }
   );
-
+alert("保存成功");
   document.getElementById("cashier").value = "";
 
   for(let p in cart){
