@@ -415,21 +415,24 @@ let total = 0;
 
 for(let name in cart){
 
-if(cart[name] > 0){
+  if(cart[name] > 0){
 
-items.push({
-name:name,
-qty:cart[name],
-price:products[name].price
-});
+    items.push({
+      name:name,
+      qty:cart[name],
+      price:products[name].price
+    });
 
-total += cart[name] * products[name].price;
+    total += cart[name] * products[name].price;
+  }
 }
-}
+
+console.log(cart);
+console.log(total);
 
 if(total === 0){
-alert("商品を選択してください");
-return;
+  alert("商品を選択してください");
+  return;
 }
 try {
 alert("保存開始");
