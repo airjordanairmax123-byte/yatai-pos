@@ -431,29 +431,37 @@ if(total === 0){
 alert("商品を選択してください");
 return;
 }
+try {
 
-await addDoc(
-collection(db,"sales"),
-{
-cashier,
-items,
-total,
-cancelled:false,
-createdAt:Date.now()
-}
-);
+  await addDoc(
+    collection(db,"sales"),
+    {
+      cashier,
+      items,
+      total,
+      cancelled:false,
+      createdAt:Date.now()
+    }
+  );
 
-document.getElementById("cashier").value = "";
+  document.getElementById("cashier").value = "";
 
-for(let p in cart){
-cart[p] = 0;
-}
+  for(let p in cart){
+    cart[p] = 0;
+  }
 
-renderItems();
+  renderItems();
 
-alert("会計完了：" + total + "円");
+  alert("会計完了：" + total + "円");
 
-};
+} catch(err){
+
+  alert("Firestoreエラー");
+
+  console.log(err);
+
+ }
+
 
 const salesQuery = query(
 collection(db,"sales"),
