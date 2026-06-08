@@ -628,7 +628,7 @@ sales.forEach((sale)=>{
 const items =
 sale.items
 .map(i => `${i.name}×${i.qty}`)
-.join(" ");
+.join("、")
 
 const status =
 sale.cancelled
