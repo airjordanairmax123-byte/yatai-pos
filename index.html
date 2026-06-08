@@ -514,7 +514,7 @@ if(sales.length === 0){
 
     let itemText = sale.items
       .map(i => `${i.name}×${i.qty}`)
-      .join(", ");
+    .join("<br>");
 
     html += `
 <div class="sale-card">
