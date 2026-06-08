@@ -626,9 +626,9 @@ let csv =
 sales.forEach((sale)=>{
 
 const items =
-sale.items
-.map(i => `${i.name}×${i.qty}`)
-.join("、")
+  sale.items
+  .map(i => `${i.name}×${i.qty}`)
+  .join(" / ");
 
 const status =
 sale.cancelled
