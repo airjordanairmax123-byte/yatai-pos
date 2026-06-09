@@ -463,16 +463,13 @@ alert("保存開始");
 
   alert("会計完了：" + total + "円");
 
-} catch(err){
+} catch(err) {
+  alert("Firestoreエラー");
+  console.log(err);
   alert(err.message);
-  console.error(err);
 }
 
- alert("Firestoreエラー");
-
-console.log(err);
-
-alert(err.message);
+ 
  }
 }; //
 
