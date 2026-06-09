@@ -468,9 +468,10 @@ try {
   renderItems();
 
   alert("会計完了：" + total + "円");
-
+isProcessing = false;
 } catch(err) {
-  
+ isProcessing = false;
+} 
   console.log(err);
   alert(err.message);
 }
