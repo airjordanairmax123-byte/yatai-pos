@@ -444,7 +444,7 @@ if(total === 0){
   return;
 }
 try {
-
+console.log("Firestore保存開始");
   
   await addDoc(
     
@@ -470,11 +470,11 @@ try {
   alert("会計完了：" + total + "円");
 isProcessing = false;
 } catch(err) {
- isProcessing = false;
-} 
   console.log(err);
   alert(err.message);
-}
+ isProcessing = false;
+} 
+  
 
 
 };
