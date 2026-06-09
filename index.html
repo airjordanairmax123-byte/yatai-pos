@@ -410,6 +410,12 @@ window.addEventListener("offline", () => {
 window.addEventListener("online", () => {
   document.getElementById("offlineBanner").style.display = "none";
 });
+  window.addEventListener("online", () => {
+  document.getElementById("offlineBanner").style.display = "none";
+});
+
+let isProcessing = false;
+
   window.checkout = async function(){
 if(isProcessing){
   alert("会計処理中です");
