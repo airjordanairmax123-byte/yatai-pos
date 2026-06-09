@@ -1,38 +1,71 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html><html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>屋台POS v2 完全版</title>
-<style>
-body{font-family:sans-serif;background:#f3f4f6;margin:0;padding:12px}
-.card{background:#fff;border-radius:12px;padding:12px;margin:10px 0}
-input,button{font-size:16px}
-button{padding:10px;border-radius:8px}
-</style>
-</head>
-<body>
-<h1>🏮屋台POS v2 完全版</h1>
+<title>屋台POS 完全版</title><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<div class="card">
-<p>Firebase設定は現在の ringo-44a8c を貼り付けて使用してください。</p>
-<ul>
-<li>冷やしきゅうり 200円</li>
-<li>ヨーヨー釣り 200円</li>
-<li>フルーツミックス 300円</li>
-<li>ポッキンアイス 200円</li>
-</ul>
-<p>実装対象:</p>
-<ul>
-<li>Firestore保存</li>
-<li>履歴表示</li>
-<li>最新取消</li>
-<li>商品ランキング</li>
-<li>日付指定CSV</li>
-<li>オフライン警告</li>
-<li>商品追加/削除</li>
-<li>スマホ最適化</li>
-</ul>
-</div>
-</body>
+const firebaseConfig = {
+  apiKey: "AIzaSyCWoAJihRNiylAvE7IQMY4LsIwDF3duBTA",
+  authDomain: "ringo-44a8c.firebaseapp.com",
+  projectId: "ringo-44a8c",
+  storageBucket: "ringo-44a8c.firebasestorage.app",
+  messagingSenderId: "588192537966",
+  appId: "1:588192537966:web:b6fcc4da16431c62d0757f",
+  measurementId: "G-H5CXWLK6NF"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.db = db;
+</script><style>
+body{
+font-family:sans-serif;
+background:#f3f4f6;
+padding:10px;
+margin:0;
+}
+
+.card{
+background:white;
+border-radius:15px;
+padding:15px;
+margin-bottom:12px;
+box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+input{
+width:100%;
+padding:12px;
+font-size:18px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+font-size:20px;
+border:none;
+border-radius:12px;
+margin-top:10px;
+}
+
+.green{background:#22c55e;color:white;}
+.red{background:#ef4444;color:white;}
+
+.total{
+font-size:50px;
+font-weight:bold;
+text-align:center;
+}
+</style></head><body><div class="card">
+<h1>🏮屋台POS 完全版</h1>
+<input id="staff" placeholder="担当者名">
+</div><div id="products"></div><div class="card">
+<div class="total" id="total">0円</div>
+<button class="green">会計</button>
+<button class="red">リセット</button>
+</div></body>
 </html>
