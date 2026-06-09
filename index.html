@@ -439,7 +439,7 @@ renderItems();
 
     console.log("Firestore保存開始");
 
-    await addDoc(
+    const ref = await addDoc(
       collection(db,"sales"),
       {
         cashier,
@@ -449,7 +449,7 @@ renderItems();
         createdAt:Date.now()
       }
     );
-
+alert("保存成功: " + ref.id);
     console.log("Firestore保存成功");
 
     document.getElementById("cashier").value = "";
@@ -479,33 +479,36 @@ const salesQuery = query(
   orderBy("createdAt","desc")
 );
 
-onSnapshot(salesQuery,(snapshot)=>{
+onSnapshot(
+  salesQuery,
+  (snapshot) => {
 
-  
+    sales = [];
 
-  sales = [];
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
 
-  snapshot.forEach((docSnap)=>{
+      console.log(data);
 
-    const data = docSnap.data();
+      if(!data.items) return;
 
-    console.log(data);
-
-    if(!data.items) return;
-
-    sales.push({
-      id:docSnap.id,
-      ...data
+      sales.push({
+        id: docSnap.id,
+        ...data
+      });
     });
 
-  });
-
-  
-
-  renderHistory();
-  renderSummary();
-
-});
+    renderHistory();
+    renderSummary();
+  },
+  (error) => {
+    alert(
+      "Firestore読込エラー\n\n" +
+      error.code + "\n" +
+      error.message
+    );
+  }
+);
 
 function renderHistory(){
 
