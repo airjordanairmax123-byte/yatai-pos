@@ -411,6 +411,12 @@ window.addEventListener("online", () => {
   document.getElementById("offlineBanner").style.display = "none";
 });
   window.checkout = async function(){
+if(isProcessing){
+  alert("会計処理中です");
+  return;
+}
+
+isProcessing = true;
 
   const cashier =
   document.getElementById("cashier").value.trim();
