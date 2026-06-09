@@ -438,7 +438,7 @@ try {
 alert("保存開始");
   
   await addDoc(
-    alert("保存成功");
+    
     collection(db,"sales"),
     {
       cashier,
@@ -448,7 +448,7 @@ alert("保存開始");
       createdAt:Date.now()
     }
   );
-  
+  alert("保存成功");
 
   document.getElementById("cashier").value = "";
 
