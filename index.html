@@ -436,43 +436,35 @@ renderItems();
   }
 
   try {
-alert("TRY開始");
-    console.log("Firestore保存開始");
+  alert("TRY開始");
 
-    const ref = await addDoc(
-      collection(db,"sales"),
-      {
-        cashier,
-        items,
-        total,
-        cancelled:false,
-        createdAt:Date.now()
-      }
-    );
-alert("保存成功: " + ref.id);
-    console.log("Firestore保存成功");
+  alert("addDoc前");
 
-    document.getElementById("cashier").value = "";
-
-    for(let p in cart){
-      cart[p] = 0;
+  const ref = await addDoc(
+    collection(db,"sales"),
+    {
+      cashier,
+      items,
+      total,
+      cancelled:false,
+      createdAt:Date.now()
     }
+  );
 
-    renderItems();
+  alert("addDoc後");
 
-    alert("会計完了：" + total + "円");
+  alert("保存成功:" + ref.id);
 
-  } catch(err) {
-alert("CATCHに入りました");
+} catch(err) {
 
-    console.error(err);
+  alert("CATCHに入りました");
 
-    alert(
-      "Firestoreエラー\n\n" +
-      err.code + "\n" +
-      err.message
-    );
-  }
+  alert(
+    "Firestoreエラー\n\n" +
+    err.code + "\n" +
+    err.message
+  );
+}
 };
 
 const salesQuery = query(
