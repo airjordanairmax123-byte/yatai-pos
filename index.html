@@ -436,9 +436,14 @@ renderItems();
   }
 
   try {
-  alert("TRY開始");
+  
+alert("TRY開始");
 
-  alert("addDoc前");
+alert(typeof addDoc);
+alert(typeof db);
+
+alert("addDoc前");
+
 
   const ref = await addDoc(
     collection(db,"sales"),
