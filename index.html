@@ -443,7 +443,22 @@ alert(typeof addDoc);
 alert(typeof db);
 
 alert("addDoc前");
+alert("collection作成");
 
+const salesRef = collection(db,"sales");
+
+alert("collection OK");
+
+const ref = await addDoc(
+  salesRef,
+  {
+    cashier,
+    items,
+    total,
+    cancelled:false,
+    createdAt:Date.now()
+  }
+);
 
   const ref = await addDoc(
     collection(db,"sales"),
