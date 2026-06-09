@@ -402,6 +402,14 @@ cart[p] = 0;
 
 renderItems();
 }
+  // オフライン警告
+window.addEventListener("offline", () => {
+  document.getElementById("offlineBanner").style.display = "block";
+});
+
+window.addEventListener("online", () => {
+  document.getElementById("offlineBanner").style.display = "none";
+});
   window.checkout = async function(){
 
   const cashier =
