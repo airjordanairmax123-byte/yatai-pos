@@ -441,16 +441,20 @@ try {
 
   
   await addDoc(
-    
-    collection(db,"sales"),
-    {
-      cashier,
-      items,
-      total,
-      cancelled:false,
-      createdAt:Date.now()
-    }
-  );
+  alert("Firestore保存直前");
+
+await addDoc(
+  collection(db,"sales"),
+  {
+    cashier,
+    items,
+    total,
+    cancelled:false,
+    createdAt:Date.now()
+  }
+);
+
+alert("Firestore保存成功");
   
 
   document.getElementById("cashier").value = "";
