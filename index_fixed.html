@@ -435,7 +435,8 @@ if(total === 0){
   return;
 }
 try {
-alert("保存開始");
+
+  
   await addDoc(
     collection(db,"sales"),
     {
@@ -446,7 +447,8 @@ alert("保存開始");
       createdAt:Date.now()
     }
   );
-alert("保存成功");
+  
+
   document.getElementById("cashier").value = "";
 
   for(let p in cart){
@@ -474,7 +476,7 @@ const salesQuery = query(
 
 onSnapshot(salesQuery,(snapshot)=>{
 
-  alert("取得件数：" + snapshot.size);
+  
 
   sales = [];
 
@@ -484,6 +486,8 @@ onSnapshot(salesQuery,(snapshot)=>{
 
     console.log(data);
 
+    if(!data.items) return;
+
     sales.push({
       id:docSnap.id,
       ...data
@@ -491,7 +495,7 @@ onSnapshot(salesQuery,(snapshot)=>{
 
   });
 
-  alert("sales件数：" + sales.length);
+  
 
   renderHistory();
   renderSummary();
@@ -500,56 +504,50 @@ onSnapshot(salesQuery,(snapshot)=>{
 
 function renderHistory(){
 
-  alert("renderHistory開始");
+  
 
   let html = "";
 
 if(sales.length === 0){
 
-html = "<p>まだ売上がありません</p>";
+  html = "<p>まだ売上がありません</p>";
 
 }else{
 
-sales.forEach((sale)=>{
+  sales.forEach((sale)=>{
 
-let itemText = sale.items
-.map(i => `${i.name}×${i.qty}`)
-.join("、");
+    let itemText = sale.items
+      .map(i => `${i.name}×${i.qty}`)
+    .join("<br>");
 
-html += `
+    html += `
 <div class="sale-card">
+  <div>${new Date(sale.createdAt).toLocaleString()}</div>
 
-<div>
-${new Date(sale.createdAt).toLocaleString()}
-</div>
+  <div>
+    担当：${sale.cashier}
+  </div>
 
-<div>
-担当：${sale.cashier}
-</div>
+  <div>
+    ${itemText}
+  </div>
 
-<div>
-${itemText}
-</div>
+  <div>
+    <strong>${sale.total}円</strong>
+  </div>
 
-<div>
-<strong>${sale.total}円</strong>
-</div>
-
-${sale.cancelled
-? '<div class="cancelled">取消済み</div>'
-: ''
-}
-
+  ${
+    sale.cancelled
+      ? '<div class="cancelled">取消済み</div>'
+      : ''
+  }
 </div>
 `;
-});
-}
-alert(html.length);
+  });
 
-alert(document.getElementById("history"));
+}
 
 document.getElementById("history").innerHTML = html;
-
 } // renderHistory終了
 
 function renderSummary(){
@@ -632,9 +630,9 @@ let csv =
 sales.forEach((sale)=>{
 
 const items =
-sale.items
-.map(i => `${i.name}×${i.qty}`)
-.join(" ");
+  sale.items
+  .map(i => `${i.name}×${i.qty}`)
+  .join(" / ");
 
 const status =
 sale.cancelled
