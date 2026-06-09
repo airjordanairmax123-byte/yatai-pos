@@ -445,10 +445,16 @@ if(total === 0){
   return;
 }
 try {
-console.log("Firestore保存開始");
-  
+  console.log("Firestore保存開始");
+
+  console.log({
+    cashier,
+    items,
+    total
+  });
+
   await addDoc(
-    
+        
     collection(db,"sales"),
     {
       cashier,
