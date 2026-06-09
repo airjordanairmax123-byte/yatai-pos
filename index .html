@@ -404,7 +404,12 @@ cart[p] = 0;
 renderItems();
 }
   window.checkout = async function(){
+if(isProcessing){
+  alert("会計処理中です");
+  return;
+}
 
+isProcessing = true;
 const cashier =
 document.getElementById("cashier").value.trim();
 
