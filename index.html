@@ -404,78 +404,76 @@ cart[p] = 0;
 renderItems();
 }
   window.checkout = async function(){
+window.checkout = async function(){
 
-const cashier =
-document.getElementById("cashier").value.trim();
+  const cashier =
+  document.getElementById("cashier").value.trim();
 
-if(!cashier){
-alert("担当者名を入力してください");
-return;
-}
-
-let items = [];
-let total = 0;
-
-for(let name in cart){
-
-  if(cart[name] > 0){
-
-    items.push({
-      name:name,
-      qty:cart[name],
-      price:products[name].price
-    });
-
-    total += cart[name] * products[name].price;
-  }
-}
-
-console.log(cart);
-console.log(total);
-
-if(total === 0){
-  alert("商品を選択してください");
-  return;
-}
-try {
-
-  
-  await addDoc(
-  alert("Firestore保存直前");
-
-await addDoc(
-  collection(db,"sales"),
-  {
-    cashier,
-    items,
-    total,
-    cancelled:false,
-    createdAt:Date.now()
-  }
-);
-
-alert("Firestore保存成功");
-  
-
-  document.getElementById("cashier").value = "";
-
-  for(let p in cart){
-    cart[p] = 0;
+  if(!cashier){
+    alert("担当者名を入力してください");
+    return;
   }
 
-  renderItems();
+  let items = [];
+  let total = 0;
 
-  alert("会計完了：" + total + "円");
+  for(let name in cart){
 
-} catch(err) {
-  
-  console.log(err);
-  alert(err.message);
-}
+    if(cart[name] > 0){
 
+      items.push({
+        name:name,
+        qty:cart[name],
+        price:products[name].price
+      });
 
+      total += cart[name] * products[name].price;
+    }
+  }
+
+  if(total === 0){
+    alert("商品を選択してください");
+    return;
+  }
+
+  try {
+
+    console.log("Firestore保存開始");
+
+    await addDoc(
+      collection(db,"sales"),
+      {
+        cashier,
+        items,
+        total,
+        cancelled:false,
+        createdAt:Date.now()
+      }
+    );
+
+    console.log("Firestore保存成功");
+
+    document.getElementById("cashier").value = "";
+
+    for(let p in cart){
+      cart[p] = 0;
+    }
+
+    renderItems();
+
+    alert("会計完了：" + total + "円");
+
+  } catch(err) {
+
+    console.error(err);
+
+    alert(
+      "Firestoreエラー\n\n" +
+      err.code + "\n" +
+      err.message
+    );
+  }
 };
-
 
 const salesQuery = query(
   collection(db,"sales"),
