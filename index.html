@@ -295,6 +295,8 @@ measurementId:"G-H5CXWLK6NF"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+document.body.innerHTML =
+"<h1 style='color:red'>DEBUG OK</h1>";
 console.log("db", db);
 alert("Firestore初期化OK");
 const products = {
