@@ -477,11 +477,11 @@ alert("addDoc成功");　　　
 
   alert("会計完了：" + total + "円");
 isProcessing = false;
-} catch(err) {
-  console.log(err);
+catch(err) {
+  alert("エラー発生");
   alert(err.message);
- isProcessing = false;
-} 
+  alert(JSON.stringify(err));
+}
   
 
 
