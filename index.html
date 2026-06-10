@@ -266,38 +266,35 @@ class="summary">
 
 <script type="module">
 
-
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  
+
 import {
-getFirestore,
-collection,
-addDoc,
-query,
-orderBy,
-onSnapshot,
-doc,
-updateDoc
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey:"AIzaSyCWoAJihRNiylAvE7IQMY4LsIwDF3duBTA",
-authDomain:"ringo-44a8c.firebaseapp.com",
-projectId:"ringo-44a8c",
-storageBucket:"ringo-44a8c.firebasestorage.app",
-messagingSenderId:"588192537966",
-appId:"1:588192537966:web:b6fcc4da16431c62d0757f",
-measurementId:"G-H5CXWLK6NF"
+  apiKey: "AIzaSyCWoAJihRNiylAvE7IQMY4LsIwDF3duBTA",
+  authDomain: "ringo-44a8c.firebaseapp.com",
+  projectId: "ringo-44a8c",
+  storageBucket: "ringo-44a8c.firebasestorage.app",
+  messagingSenderId: "588192537966",
+  appId: "1:588192537966:web:b6fcc4da16431c62d0757f",
+  measurementId: "G-H5CXWLK6NF"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-document.body.innerHTML =
-"<h1 style='color:red'>DEBUG OK</h1>";
-console.log("db", db);
+
+console.log("Firestore初期化OK", db);
 alert("Firestore初期化OK");
 const products = {
 
