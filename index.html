@@ -452,8 +452,9 @@ try {
     items,
     total
   });
+alert("addDoc直前");
 
-  await addDoc(
+await addDoc(
         
     collection(db,"sales"),
     {
@@ -463,8 +464,8 @@ try {
       cancelled:false,
       createdAt:Date.now()
     }
-  );
-  
+);
+alert("addDoc成功");　　　
 
   document.getElementById("cashier").value = "";
 
