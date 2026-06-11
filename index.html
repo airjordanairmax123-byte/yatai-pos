@@ -445,7 +445,7 @@ alert("tryに入った");
   alert("保存直前");
 
   
-  await addDoc(
+  const ref = await addDoc(
     collection(db,"sales"),
     {
       cashier,
