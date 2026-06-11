@@ -455,7 +455,9 @@ try {
 alert("addDoc直前");
 console.log(db);
 console.log(collection(db,"sales"));
-await addDoc(
+  alert("collection作成OK");
+console.log(collection(db,"sales"));
+const docRef = await addDoc(
         
     collection(db,"sales"),
     {
@@ -464,6 +466,8 @@ await addDoc(
       total,
       cancelled:false,
       createdAt:Date.now()
+      console.log(docRef.id);
+alert("保存成功");
     }
 );
 alert("addDoc成功");　　　
