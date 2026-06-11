@@ -461,12 +461,14 @@ try {
 
 } catch(err){
 
+ console.error("Firestoreエラー", err);
+
  alert("Firestoreエラー");
 
-console.log(err);
+ alert(err.message);
 
-alert(err.message);
- }
+ alert(JSON.stringify(err));
+}
 }; //
 
 const salesQuery = query(
