@@ -466,12 +466,12 @@ const docRef = await addDoc(
       total,
       cancelled:false,
       createdAt:Date.now()
-      console.log(docRef.id);
-alert("保存成功");
+      
     }
 );
 alert("addDoc成功");　　　
-
+console.log(docRef.id);
+alert("保存成功");
   document.getElementById("cashier").value = "";
 
   for(let p in cart){
