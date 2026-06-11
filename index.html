@@ -453,7 +453,8 @@ try {
     total
   });
 alert("addDoc直前");
-
+console.log(db);
+console.log(collection(db,"sales"));
 await addDoc(
         
     collection(db,"sales"),
