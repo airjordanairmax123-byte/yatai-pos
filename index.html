@@ -497,13 +497,16 @@ const salesQuery = query(
   collection(db,"sales"),
   orderBy("createdAt","desc")
 );
-
-onSnapshot(salesQuery,(snapshot)=>{
+alert("onSnapshot開始");
+onSnapshot(
+  salesQuery,
+  (snapshot)=>{
 
   
 
   sales = [];
-
+console.log(snapshot.size);
+alert("件数=" + snapshot.size);
   snapshot.forEach((docSnap)=>{
 
     const data = docSnap.data();
@@ -515,17 +518,21 @@ onSnapshot(salesQuery,(snapshot)=>{
     sales.push({
       id:docSnap.id,
       ...data
-    });
+    }
+    );
 
-  });
 
   
 
   renderHistory();
   renderSummary();
 
-});
-
+},
+(err)=>{
+  alert("onSnapshotエラー");
+  alert(err.message);
+}
+);
 function renderHistory(){
 
   
