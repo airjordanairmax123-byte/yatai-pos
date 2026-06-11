@@ -402,13 +402,17 @@ renderItems();
 }
   window.checkout = async function(){
 alert("会計開始");
+    alert("担当者チェック前");
 const cashier =
 document.getElementById("cashier").value.trim();
 
 if(!cashier){
+  
 alert("担当者名を入力してください");
 return;
 }
+
+alert("担当者チェック後");
 
 let items = [];
 let total = 0;
