@@ -444,7 +444,13 @@ if(total === 0){
 try {
 alert("tryに入った");
 
-  alert("保存直前");
+   alert("保存直前");
+
+  alert("addDoc開始");
+
+  const ref = await addDoc(
+    collection(db,"sales"),
+     {
 
   
   const ref = await addDoc(
