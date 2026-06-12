@@ -448,9 +448,7 @@ alert("tryに入った");
 
   alert("addDoc開始");
 
-  const ref = await addDoc(
-    collection(db,"sales"),
-     {
+
 
   
   const ref = await addDoc(
@@ -462,7 +460,9 @@ alert("tryに入った");
       cancelled:false,
       createdAt:Date.now()
     }
-  );
+}
+);
+alert("addDoc終了");
   } catch(e){
 console.error(e);
 
