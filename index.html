@@ -480,18 +480,7 @@ return;
 
   alert("会計完了：" + total + "円");
 
-} catch(err){
-
- console.error("Firestoreエラー", err);
-
- alert("Firestoreエラー");
-
- alert(err.message);
-
- alert(JSON.stringify(err));
-}
 }; //
-
 const salesQuery = query(
   collection(db,"sales"),
   orderBy("createdAt","desc")
