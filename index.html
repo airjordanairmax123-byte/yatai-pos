@@ -452,7 +452,11 @@ alert("tryに入った");
 
 
   alert(typeof db);
-
+alert(JSON.stringify({
+  total,
+  cashier,
+  items
+}));
   const ref = await addDoc(
   collection(db,"sales"),
   {
