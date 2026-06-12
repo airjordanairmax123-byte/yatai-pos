@@ -458,8 +458,15 @@ alert("tryに入った");
     }
   );
   } catch(e){
-  alert("エラー：" + e.message);
-  console.error(e);
+console.error(e);
+
+alert("コード");
+alert(e.code);
+
+alert("メッセージ");
+alert(e.message);
+
+return;
 }
   alert("保存成功");
 
