@@ -453,15 +453,12 @@ alert("tryに入った");
 
   
   const ref = await addDoc(
-    collection(db,"sales"),
-    {
-      cashier,
-      items,
-      total,
-      cancelled:false,
-      createdAt:Date.now()
-    }
+  collection(db,"sales"),
+  {
+    test:"ok"
+  }
 );
+
 alert("addDoc終了");
   } catch(e){
 console.error(e);
