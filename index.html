@@ -457,6 +457,10 @@ alert("tryに入った");
       createdAt:Date.now()
     }
   );
+  } catch(e){
+  alert("エラー：" + e.message);
+  console.error(e);
+}
   alert("保存成功");
 
   document.getElementById("cashier").value = "";
