@@ -404,8 +404,7 @@ cart[p] = 0;
 renderItems();
 }
   window.checkout = async function(){
-alert("会計開始");
-    alert("担当者チェック前");
+
 const cashier =
 document.getElementById("cashier").value.trim();
 
@@ -415,7 +414,7 @@ alert("担当者名を入力してください");
 return;
 }
 
-alert("担当者チェック後");
+
 
 let items = [];
 let total = 0;
@@ -436,27 +435,21 @@ for(let name in cart){
 
 console.log(cart);
 console.log(total);
-    alert("合計=" + total);
+  
 
 if(total === 0){
   alert("商品を選択してください");
   return;
 }
 try {
-alert("tryに入った");
 
-   alert("保存直前");
 
-  alert("addDoc開始");
+   
 
 
 
-  alert(typeof db);
-alert(JSON.stringify({
-  total,
-  cashier,
-  items
-}));
+
+
   const ref = await addDoc(
   collection(db,"sales"),
   {
@@ -468,7 +461,7 @@ alert(JSON.stringify({
   }
 );
 
-alert("addDoc終了");
+
   } catch(e){
 console.error(e);
 
@@ -480,7 +473,7 @@ alert(e.message);
 
 return;
 }
-  alert("保存成功");
+  
 
   document.getElementById("cashier").value = "";
 
