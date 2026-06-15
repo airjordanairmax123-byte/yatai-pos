@@ -504,7 +504,7 @@ onSnapshot(salesQuery,(snapshot)=>{
     console.log(data);
 
     if(!data.items) return;
-
+alert(JSON.stringify(data));
     sales.push({
       id:docSnap.id,
       ...data
