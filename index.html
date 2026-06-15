@@ -492,7 +492,7 @@ const salesQuery = query(
 );
 
 onSnapshot(salesQuery,(snapshot)=>{
-alert("取得件数:" + snapshot.size);
+
   
 
   sales = [];
@@ -504,7 +504,7 @@ alert("取得件数:" + snapshot.size);
     console.log(data);
 
     if(!data.items) return;
-alert(JSON.stringify(data));
+
     sales.push({
       id:docSnap.id,
       ...data
