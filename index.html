@@ -460,7 +460,11 @@ alert(JSON.stringify({
   const ref = await addDoc(
   collection(db,"sales"),
   {
-    test:"ok"
+    total: total,
+    cashier: cashier,
+    items: items,
+    cancelled: false,
+    createdAt: Date.now()
   }
 );
 
