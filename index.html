@@ -492,7 +492,7 @@ const salesQuery = query(
 );
 
 onSnapshot(salesQuery,(snapshot)=>{
-
+alert("件数:" + snapshot.size);
   
 
   sales = [];
