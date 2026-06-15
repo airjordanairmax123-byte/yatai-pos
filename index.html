@@ -502,7 +502,9 @@ onSnapshot(salesQuery,(snapshot)=>{
     const data = docSnap.data();
 
     console.log(data);
+alert("読込:" + JSON.stringify(data));
 
+console.log(data);
     if(!data.items) return;
 
     sales.push({
