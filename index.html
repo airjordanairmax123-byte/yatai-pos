@@ -493,7 +493,6 @@ const salesQuery = query(
 );
 
 onSnapshot(salesQuery,(snapshot)=>{
-alert("件数:" + snapshot.size);
   
 
   sales = [];
@@ -501,11 +500,6 @@ alert("件数:" + snapshot.size);
   snapshot.forEach((docSnap)=>{
 
     const data = docSnap.data();
-
-    console.log(data);
-alert("読込:" + JSON.stringify(data));
-
-console.log(data);
     if(!data.items) return;
 
     sales.push({
