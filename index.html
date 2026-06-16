@@ -499,9 +499,9 @@ onSnapshot(salesQuery,(snapshot)=>{
 
   snapshot.forEach((docSnap)=>{
 
-    const data = docSnap.data();
-    if(!data.items) return;
-
+ const data = docSnap.data();
+alert("読込:" + JSON.stringify(data));
+if(!data.items) return;
     sales.push({
       id:docSnap.id,
       ...data
