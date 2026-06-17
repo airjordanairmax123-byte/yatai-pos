@@ -500,7 +500,7 @@ onSnapshot(salesQuery,(snapshot)=>{
   snapshot.forEach((docSnap)=>{
 
  const data = docSnap.data();
-alert("読込:" + JSON.stringify(data));
+
 if(!data.items) return;
     sales.push({
       id:docSnap.id,
@@ -508,7 +508,7 @@ if(!data.items) return;
     });
 
   });
-alert("sales件数=" + sales.length);
+
   
 
   renderHistory();
@@ -518,7 +518,7 @@ alert("sales件数=" + sales.length);
 
 function renderHistory(){
 
- alert("renderHistory開始");
+ 
 alert("sales件数=" + sales.length);
 
  let html = "";
@@ -563,7 +563,7 @@ if(sales.length === 0){
   });
 
 }
-alert(html);
+
 document.getElementById("history").innerHTML = html;
 } // renderHistory終了
 
