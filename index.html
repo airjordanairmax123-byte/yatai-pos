@@ -537,9 +537,11 @@ if(sales.length === 0){
     .join("<br>");
 
     html += `
-<div class="sale-card">
-  <div>${new Date(sale.createdAt).toLocaleString()}</div>
-
+<div>${
+  sale.createdAt && sale.createdAt.toDate
+    ? sale.createdAt.toDate().toLocaleString("ja-JP")
+    : "反映中…"
+}</div>
   <div>
     担当：${sale.cashier}
   </div>
