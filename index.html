@@ -538,11 +538,9 @@ if(sales.length === 0){
 
     html += `
 <div>${
-  sale.createdAt && sale.createdAt.toDate
-    ? sale.createdAt.toDate().toLocaleString("ja-JP")
-    : "反映中…"
-}</div>
-  <div>
+  ${new Date(sale.createdAt).toLocaleString("ja-JP")
+  }
+　  <div>
     担当：${sale.cashier}
   </div>
 
