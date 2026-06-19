@@ -514,32 +514,56 @@ if(!data.items) return;
   renderSummary();
 
 });
-
 function renderHistory(){
 
- 
+  let html = "";
 
+  if(sales.length === 0){
 
- let html = "";
-  
+    html = "<p>まだ売上がありません</p>";
 
+  }else{
 
-if(sales.length === 0){
+    sales.forEach((sale)=>{
 
-  html = "<p>まだ売上がありません</p>";
+      let itemText = sale.items
+        .map(i => `${i.name}×${i.qty}`)
+        .join("<br>");
 
-}else{
+      html += `
+<div class="sale-card">
 
-  sales.forEach((sale)=>{
+  <div>
+    ${new Date(sale.createdAt).toLocaleString("ja-JP")}
+  </div>
 
-    let itemText = sale.items
-      .map(i => `${i.name}×${i.qty}`)
-    .join("<br>");
+  <div>
+    担当：${sale.cashier}
+  </div>
 
-  ${new Date(sale.createdAt).toLocaleString("ja-JP")
+  <div>
+    ${itemText}
+  </div>
+
+  <div>
+    <strong>${sale.total}円</strong>
+  </div>
+
+  ${
+    sale.cancelled
+      ? '<div class="cancelled">取消済み</div>'
+      : ''
   }
-　
-} // renderHistory終了
+
+</div>
+`;
+    });
+
+  }
+
+  document.getElementById("history").innerHTML = html;
+}
+
 
 function renderSummary(){
 
