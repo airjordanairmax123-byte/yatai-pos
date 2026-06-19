@@ -536,34 +536,9 @@ if(sales.length === 0){
       .map(i => `${i.name}×${i.qty}`)
     .join("<br>");
 
-    html += `
-<div>${
   ${new Date(sale.createdAt).toLocaleString("ja-JP")
   }
-　  <div>
-    担当：${sale.cashier}
-  </div>
-
-  <div>
-    ${itemText}
-  </div>
-
-  <div>
-    <strong>${sale.total}円</strong>
-  </div>
-
-  ${
-    sale.cancelled
-      ? '<div class="cancelled">取消済み</div>'
-      : ''
-  }
-</div>
-`;
-  });
-
-}
-
-document.getElementById("history").innerHTML = html;
+　
 } // renderHistory終了
 
 function renderSummary(){
