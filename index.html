@@ -634,7 +634,17 @@ cancelledAt:Date.now()
 );
 
 alert("取消しました");
+await updateDoc(
+  doc(db,"sales",latest.id),
+  {
+    cancelled:true,
+    cancelledAt:Date.now()
+  }
+);
 
+alert("取消しました");
+
+await loadSales();
 };
 
 window.downloadCSV = function(){
