@@ -308,3 +308,205 @@ font-size:20px;
 }
 
 </style>
+// ===== 商品 =====
+const products = {
+  "冷やしきゅうり": {
+    price: 200,
+    img: "https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/images/kyuri.jpg"
+  },
+  "ヨーヨー釣り": {
+    price: 200,
+    img: "https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/images/yoyo.jpg"
+  },
+  "フルーツミックス": {
+    price: 300,
+    img: "https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/images/fruit.jpg"
+  },
+  "ポッキンアイス": {
+    price: 200,
+    img: "https://raw.githubusercontent.com/airjordanairmax123-byte/yatai-pos/main/images/ice.jpg"
+  }
+};
+
+let cart = {};
+
+Object.keys(products).forEach(name => cart[name] = 0);
+
+function updateTotal() {
+  let total = 0;
+
+  Object.keys(products).forEach(name => {
+    total += products[name].price * cart[name];
+  });
+
+  document.getElementById("cartTotal").innerText = total + "円";
+}
+
+function renderItems() {
+
+  let html = "";
+
+  Object.keys(products).forEach(name => {
+
+    const item = products[name];
+
+    html += `
+      <div class="item">
+
+        <img src="${item.img}" onerror="this.style.display='none'">
+
+        <div class="item-body">
+
+          <div class="item-name">${name}</div>
+
+          <div class="item-price">${item.price}円</div>
+
+          <div class="qty">
+
+            <button class="minus" onclick="removeItem('${name}')">－</button>
+
+            <span id="qty-${name}">${cart[name]}</span>
+
+            <button class="plus" onclick="addItem('${name}')">＋</button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  document.getElementById("items").innerHTML = html;
+
+  updateTotal();
+
+}
+
+window.addItem = function(name) {
+
+  cart[name]++;
+
+  document.getElementById("qty-" + name).innerText = cart[name];
+
+  updateTotal();
+
+}
+
+window.removeItem = function(name) {
+
+  if (cart[name] > 0) {
+
+    cart[name]--;
+
+    document.getElementById("qty-" + name).innerText = cart[name];
+
+    updateTotal();
+
+  }
+
+}
+
+window.resetCart = function() {
+
+  Object.keys(cart).forEach(name => {
+    cart[name] = 0;
+  });
+
+  renderItems();
+
+}
+
+window.checkout = function() {
+
+  alert("第2回でFirestore保存を追加します。");
+
+}
+
+renderItems();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+// ======================
+// Firestore
+// ======================
+
+const salesRef = collection(db, "sales");
+
+const salesQuery = query(
+  salesRef,
+  orderBy("createdAt", "desc")
+);
+
+let sales = [];
+renderItems();
+onSnapshot(salesQuery, (snapshot) => {
+
+  sales = [];
+
+  snapshot.forEach((docSnap) => {
+
+    const data = docSnap.data();
+
+    sales.push({
+      id: docSnap.id,
+      ...data
+    });
+
+  });
+
+  renderHistory();
+
+  renderSummary();
+
+});
+function renderHistory(){
+
+document.getElementById("history").innerHTML="";
+
+if(sales.length===0){
+
+document.getElementById("history").innerHTML=
+"まだ売上がありません";
+
+return;
+
+}
+
+let html="";
+
+sales.forEach(s=>{
+
+html+=`
+<div class="sale-card">
+
+<div>${s.cashier}</div>
+
+<div>${s.total}円</div>
+
+</div>
+`;
+
+});
+
+document.getElementById("history").innerHTML=html;
+
+}
+
+function renderSummary(){
+
+let total=0;
+
+sales.forEach(s=>{
+
+if(s.cancelled)return;
+
+total+=s.total;
+
+});
+
+document.getElementById("dailyTotal").innerText=
+total+"円";
+
+}
+
