@@ -510,3 +510,181 @@ total+"円";
 
 }
 
+window.checkout = async function () {
+
+  const cashier = document.getElementById("cashier").value.trim();
+
+  if (!cashier) {
+    alert("担当者名を入力してください");
+    return;
+  }
+
+  let items = [];
+  let total = 0;
+
+  for (const name in cart) {
+
+    if (cart[name] > 0) {
+
+      items.push({
+        name: name,
+        qty: cart[name],
+        price: products[name].price
+      });
+
+      total += cart[name] * products[name].price;
+
+    }
+
+  }
+
+  if (total === 0) {
+    alert("商品を選択してください");
+    return;
+  }
+
+  try {
+
+    await addDoc(salesRef, {
+
+      cashier: cashier,
+      items: items,
+      total: total,
+      cancelled: false,
+      createdAt: Date.now()
+
+    });
+
+    alert("保存しました");
+
+    document.getElementById("cashier").value = "";
+
+    Object.keys(cart).forEach(name => cart[name] = 0);
+
+    renderItems();
+
+  } catch (e) {
+
+    console.error(e);
+
+    alert("保存失敗");
+    alert(e.message);
+
+  }
+<div
+id="dailyCount"
+style="
+text-align:center;
+font-size:26px;
+font-weight:bold;
+margin-top:10px;
+">
+
+0件
+
+</div>
+
+}
+function renderSummary(){
+
+let total=0;
+
+let count=0;
+
+let productCounts={};
+
+Object.keys(products).forEach(name=>{
+productCounts[name]=0;
+});
+
+sales.forEach(s=>{
+
+if(s.cancelled)return;
+
+count++;
+
+total+=s.total;
+
+s.items.forEach(item=>{
+
+productCounts[item.name]+=item.qty;
+
+});
+
+});
+
+document.getElementById("dailyTotal").innerText=
+total+"円";
+
+document.getElementById("dailyCount").innerText=
+count+"件";
+
+let html="";
+
+Object.keys(productCounts).forEach(name=>{
+
+html+=`
+<div>
+
+${name}
+：
+${productCounts[name]}個
+
+</div>
+`;
+
+});
+
+document.getElementById("productSummary").innerHTML=
+html;
+
+}
+let checkoutRunning = false;
+
+if (checkoutRunning) {
+  alert("会計処理中です");
+  return;
+}
+
+checkoutRunning = true;
+checkoutRunning = false;
+checkoutRunning = false;
+window.cancelLatestSale = async function(){
+
+const activeSales =
+sales.filter(s => !s.cancelled);
+
+if(activeSales.length===0){
+alert("取消できる会計がありません");
+return;
+}
+
+const latest = activeSales[0];
+
+if(!confirm("最新会計を取り消しますか？")){
+return;
+}
+
+try{
+
+await updateDoc(
+doc(db,"sales",latest.id),
+{
+cancelled:true,
+cancelledAt:Date.now()
+}
+);
+
+alert("取消しました");
+
+}catch(e){
+
+console.error(e);
+
+alert("取消失敗");
+
+alert(e.message);
+
+}
+
+}
